@@ -10,6 +10,9 @@ num_guesses = int(num_guesses)
 low = 1
 high = 50
 
+# Initialize list of all numbers computer has guessed
+guesses = []
+
 # 6 parts to a for loop: for, variable, in, collection, colon, body
 for guess_num in range(num_guesses): # range returns a collention ("sequence"), not an int; guess_num (variable) holds whatever gets returned from range()
 
@@ -20,12 +23,25 @@ for guess_num in range(num_guesses): # range returns a collention ("sequence"), 
     # Obtain and report answer
     answer = input("Answer: ").lower()
 
-# # Tell if correct or incorrect
-# if answer == "higher":
-#     low = guess + 1
-# elif answer == "lower":
-#     high = guess - 1
-# elif answer == "correct":
-#     print("Computer correctly guessed:", guess) # input/output don't always have new line, may want to add \n
-# else:
-#     print("Invalid input! Try again.")
+    # Store guess, answer
+    guesses.append([guess, answer]) # first looks at guesses list, then calls append on list, THEN inside parantheses (guess)
+
+    # Tell if correct or incorrect
+    if answer == "higher":
+        low = guess + 1
+    elif answer == "lower":
+        high = guess - 1
+    elif answer == "correct":
+        print("Computer correctly guessed:", guess) # input/output don't always have new line, may want to add \n
+        # break # only breaks loop
+        exit() # exits program
+    else:
+        print("Invalid input! Try again.") # print doesn't return anything -- why it shows as None in Thonny
+
+# Print list, congrats
+print("Congrats! You win")
+print("All guesses: ")
+
+for guess in guesses:
+    print("Guess", guess[0], "and your number was", guess[1])
+    # print(f"Guess {guess[0]} and your number was {guess[1]}")
